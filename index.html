@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0 user-scalable = no , maximum-scale=1.0">
+  <title>TEF6686-Web</title>
+  <script src="share/lib/vue.global.js"></script>
+  <script src="share/tef6686/patch-v102-p224.js"></script>
+  <script src="share/tef6686/config.js"></script>
+  <script src="share/tef6686/interface.js"></script>
+  <script src="share/tef6686/driver.js"></script>
+  <script src="share/tef6686/radio.js"></script>
+  <style>
+    button {
+      width: 100px;
+      margin: 5px;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+    }
+    .container-buttons {
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1>TEF6686-Web</h1>
+    <div class="container">
+      当前频率：{{station/100}}MHz
+      当前音量：{{volume}}dB
+    </div>
+    <div class="container">
+      <button @click="onFrequencyUp">频率+</button>
+      <button @click="onFrequencyDown">频率-</button>
+      <button @click="onVolumeUp">音量+</button>
+      <button @click="onVolumeDown">音量-</button>
+    </div>
+    <div class="container">频率列表:</div>
+    <div class="container container-buttons">
+      <button v-for="frequency in stations" :key="frequency" value="station" @click="onTuneTo(frequency)"
+        :style="frequency==station?'color:red;':'color:green;'">{{frequency/100}}</button>
+    </div>
+  </div>
+  <script src="share/index.js"></script>
+</body>
+
+</html>
